@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Details - Shiksha Nex Technologies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F9FAFB;
+            --primary: #2563EB;
+            --primary-hover: #1D4ED8;
+            --secondary: #64748B;
+            --card-bg: #FFFFFF;
+            --border: #E5E7EB;
+            --text-primary: #111827;
+            --text-secondary: #6B7280;
+            --success: #22C55E;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --shadow: 0px 10px 25px rgba(0,0,0,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            height: 70px;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 120px 0 60px;
+            min-height: 100vh;
+        }
+
+        .page-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        /* Steps Indicator */
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .step.active .step-circle {
+            background: var(--primary);
+            color: white;
+        }
+
+        .step.completed .step-circle {
+            background: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .step.active .step-label,
+        .step.completed .step-label {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .step-line {
+            width: 40px;
+            height: 2px;
+            background: var(--border);
+        }
+
+        .step.completed + .step-line,
+        .step.completed ~ .step-line {
+            background: var(--success);
+        }
+
+        /* Summary Card */
+        .summary-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            padding: 32px;
+        }
+
+        .summary-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .summary-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .summary-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .resume-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #EFF6FF;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Policy Summary */
+        .policy-summary {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .policy-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .policy-item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--success);
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .btn {
+            height: 48px;
+            padding: 0 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .steps {
+                flex-wrap: wrap;
+            }
+
+            .step-label {
+                display: none;
+            }
+
+            .step-line {
+                display: none;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 100px 0 40px;
+            }
+
+            .summary-card {
+                padding: 24px;
+            }
+
+            .button-group {
+                flex-direction: column-reverse;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">Shiksha Nex <span>Technologies</span></a>
+            <a href="agreement.html" class="back-link">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-container">
+                <!-- Steps Indicator -->
+                <div class="steps">
+                    <div class="step completed">
+                        <div class="step-circle">1</div>
+                        <span class="step-label">Register</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step completed">
+                        <div class="step-circle">2</div>
+                        <span class="step-label">Agreement</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step active">
+                        <div class="step-circle">3</div>
+                        <span class="step-label">Review</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step">
+                        <div class="step-circle">4</div>
+                        <span class="step-label">Done</span>
+                    </div>
+                </div>
+
+                <h1 class="page-title">Review Your Details</h1>
+
+                <!-- Summary Card -->
+                <div class="summary-card">
+                    <h2 class="summary-title">Application Summary</h2>
+                    
+                    <div class="summary-grid" id="summaryContent">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+
+                    <div class="policy-summary">
+                        <div class="policy-item">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Fees & Service Policy agreed</span>
+                        </div>
+                        <div class="policy-item">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Terms & Conditions agreed</span>
+                        </div>
+                        <div class="policy-item">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Agreement & Policy confirmed</span>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="button-group">
+                        <a href="registration.html" class="btn btn-secondary">Edit Details</a>
+                        <button class="btn btn-primary" onclick="submitRegistration()">
+                            Submit Registration
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load and display registration data
+        const registrationData = JSON.parse(localStorage.getItem('registrationData') || '{}');
+        const policyAccepted = localStorage.getItem('policyAccepted');
+
+        if (!registrationData.fullName) {
+            window.location.href = 'registration.html';
+        }
+
+        const branchNames = {
+            'computer-science': 'Computer Science',
+            'information-science': 'Information Science',
+            'electronics': 'Electronics',
+            'mechanical': 'Mechanical',
+            'civil': 'Civil',
+            'other': 'Other'
+        };
+
+        const yearNames = {
+            '1st-year': '1st Year',
+            '2nd-year': '2nd Year',
+            '3rd-year': '3rd Year',
+            '4th-year': '4th Year',
+            'graduate': 'Graduate'
+        };
+
+        document.getElementById('summaryContent').innerHTML = `
+            <div class="summary-item">
+                <span class="summary-label">Full Name</span>
+                <span class="summary-value">${registrationData.fullName || '-'}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Email Address</span>
+                <span class="summary-value">${registrationData.email || '-'}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Phone Number</span>
+                <span class="summary-value">${registrationData.phone || '-'}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">College Name</span>
+                <span class="summary-value">${registrationData.college || '-'}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Course / Branch</span>
+                <span class="summary-value">${branchNames[registrationData.branch] || '-'}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Year of Study</span>
+                <span class="summary-value">${yearNames[registrationData.year] || '-'}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">City</span>
+                <span class="summary-value">${registrationData.city || '-'}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">State</span>
+                <span class="summary-value">${registrationData.state || '-'}</span>
+            </div>
+            <div class="summary-item full-width">
+                <span class="summary-label">Resume</span>
+                <div class="resume-badge">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    ${registrationData.resume || 'No file uploaded'}
+                </div>
+            </div>
+        `;
+
+        function submitRegistration() {
+            // Save submission timestamp
+            registrationData.submittedAt = new Date().toISOString();
+            registrationData.status = 'pending';
+            
+            // Get existing registrations
+            const registrations = JSON.parse(localStorage.getItem('allRegistrations') || '[]');
+            registrations.push(registrationData);
+            localStorage.setItem('allRegistrations', JSON.stringify(registrations));
+            
+            // Clear form data and redirect to success
+            localStorage.removeItem('registrationData');
+            localStorage.removeItem('policyAccepted');
+            
+            window.location.href = 'success.html';
+        }
+    </script>
+</body>
+</html>
+

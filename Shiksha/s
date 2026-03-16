@@ -1,0 +1,196 @@
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Menu, X, ChevronDown } from "lucide-react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
+import shikshaLogo from "@/assets/shiksha-nex-logo.png";
+
+const courses = [
+  { title: "IT Training", href: "/courses/it", description: "Java, Python, AI/ML, Cloud & more" },
+  { title: "HR Training", href: "/courses/hr", description: "HR Generalist, Recruiter, Payroll" },
+  { title: "Digital Marketing", href: "/courses/digital-marketing", description: "SEO, SMM, Google Ads, Analytics" },
+  { title: "Graphic Design", href: "/courses/graphic-design", description: "Photoshop, Illustrator, UI/UX" },
+  { title: "Nursing Training", href: "/courses/nursing", description: "Clinical Training, ICU, Emergency Care" },
+];
+
+const programs = [
+  { title: "Degree Programs", href: "/degree-programs", description: "Online UG/PG through Universities" },
+  { title: "Nursing Hospital Management", href: "/nursing-hospital-management", description: "1/2/3 Year Advanced Program" },
+  { title: "HR Internship", href: "/hr-internship", description: "Earn While You Learn" },
+];
+
+const platforms = [
+  { title: "Talent Connect", href: "/talent-connect", description: "AI Recruitment Platform" },
+  { title: "Tech Partner", href: "/tech-partner", description: "Freelance Marketplace" },
+  { title: "Health Connect", href: "/health-connect", description: "Healthcare Platform" },
+  { title: "AI Lab", href: "/ai-lab", description: "AI Project Builder" },
+  { title: "Projects", href: "/projects", description: "Live Project Marketplace" },
+  { title: "Services", href: "/services", description: "Our Services" },
+];
+
+const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (path: string) => location.pathname === path;
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
+      <div className="container flex h-16 items-center justify-between">
+        <Link to="/" className="flex items-center gap-2">
+          <img src={shikshaLogo} alt="Shiksha Nex Technologies" className="h-12 w-auto" />
+          <div className="hidden sm:block">
+            <span className="text-lg font-heading font-bold text-foreground">Shiksha Nex</span>
+            <span className="block text-xs text-muted-foreground">Technologies OPC Pvt Ltd</span>
+          </div>
+        </Link>
+
+        <nav className="hidden lg:flex items-center gap-1">
+          <Link to="/" className={cn("px-3 py-2 text-sm font-medium rounded-md transition-colors", isActive("/") ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-primary hover:bg-primary/5")}>
+            Home
+          </Link>
+          <Link to="/about" className={cn("px-3 py-2 text-sm font-medium rounded-md transition-colors", isActive("/about") ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-primary hover:bg-primary/5")}>
+            About Us
+          </Link>
+          
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-sm font-medium bg-transparent">Courses</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="w-[600px] p-4">
+                    <div className="mb-4">
+                      <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Training Courses</h3>
+                      <div className="grid grid-cols-2 gap-2">
+                        {courses.map((course) => (
+                          <Link key={course.title} to={course.href} className="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent/10">
+                            <div className="text-sm font-medium leading-none">{course.title}</div>
+                            <p className="text-xs text-muted-foreground mt-1">{course.description}</p>
+                          </Link>
+                        ))}
+                      </div>
+                    <div className="mb-4 border-t pt-4">
+                      <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Programs</h3>
+                      <div className="grid grid-cols-2 gap-2">
+                        {programs.map((program) => (
+                          <Link key={program.title} to={program.href} className="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent/10">
+                            <div className="text-sm font-medium leading-none">{program.title}</div>
+                            <p className="text-xs text-muted-foreground mt-1">{program.description}</p>
+                          </Link>
+                        ))}
+                      </div>
+                    <div className="border-t pt-4">
+                      <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Platforms & Services</h3>
+                      <div className="grid grid-cols-3 gap-2">
+                        {platforms.map((platform) => (
+                          <Link key={platform.title} to={platform.href} className="block select-none rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent/10">
+                            <div className="text-sm font-medium leading-none">{platform.title}</div>
+                          </Link>
+                        ))}
+                      </div>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+
+          <Link to="/internships" className={cn("px-3 py-2 text-sm font-medium rounded-md transition-colors", isActive("/internships") ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-primary hover:bg-primary/5")}>
+            Internships
+          </Link>
+          <Link to="/jobs" className={cn("px-3 py-2 text-sm font-medium rounded-md transition-colors", isActive("/jobs") ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-primary hover:bg-primary/5")}>
+            Jobs
+          </Link>
+          <Link to="/placement" className={cn("px-3 py-2 text-sm font-medium rounded-md transition-colors", isActive("/placement") ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-primary hover:bg-primary/5")}>
+            Placement Services
+          </Link>
+          <Link to="/careers" className={cn("px-3 py-2 text-sm font-medium rounded-md transition-colors", isActive("/careers") ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-primary hover:bg-primary/5")}>
+            Careers
+          </Link>
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <Link to="/apply" className="hidden sm:block">
+            <Button variant="accent" size="sm">Apply Now</Button>
+          </Link>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild className="hidden sm:block">
+              <Button variant="outline">Login</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <Link to="/auth" onClick={(e) => e.currentTarget.blur()} className="no-underline">
+                <DropdownMenuItem className="cursor-pointer"><span>Student Login</span></DropdownMenuItem>
+              </Link>
+              <Link to="/employer/auth" onClick={(e) => e.currentTarget.blur()} className="no-underline">
+                <DropdownMenuItem className="cursor-pointer"><span>Employer Login</span></DropdownMenuItem>
+              </Link>
+              <DropdownMenuSeparator />
+              <Link to="/admin/auth" onClick={(e) => e.currentTarget.blur()} className="no-underline">
+                <DropdownMenuItem className="cursor-pointer text-amber-600"><span>Admin Login</span></DropdownMenuItem>
+              </Link>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <button className="lg:hidden p-2 rounded-md hover:bg-muted" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+      {isMobileMenuOpen && (
+        <div className="lg:hidden border-t bg-card animate-fade-in max-h-[80vh] overflow-y-auto">
+          <nav className="container py-4 flex flex-col gap-1">
+            <Link to="/" className="px-4 py-3 rounded-lg hover:bg-muted transition-colors font-medium" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+            <Link to="/about" className="px-4 py-3 rounded-lg hover:bg-muted transition-colors font-medium" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
+            <Link to="/courses" className="px-4 py-3 rounded-lg hover:bg-muted transition-colors font-medium" onClick={() => setIsMobileMenuOpen(false)}>Courses</Link>
+            <Link to="/degree-programs" className="px-4 py-3 rounded-lg hover:bg-muted transition-colors font-medium" onClick={() => setIsMobileMenuOpen(false)}>Degree Programs</Link>
+            <Link to="/internships" className="px-4 py-3 rounded-lg hover:bg-muted transition-colors font-medium" onClick={() => setIsMobileMenuOpen(false)}>Internships</Link>
+            <Link to="/jobs" className="px-4 py-3 rounded-lg hover:bg-muted transition-colors font-medium" onClick={() => setIsMobileMenuOpen(false)}>Jobs</Link>
+            <Link to="/placement" className="px-4 py-3 rounded-lg hover:bg-muted transition-colors font-medium" onClick={() => setIsMobileMenuOpen(false)}>Placement Services</Link>
+            <Link to="/careers" className="px-4 py-3 rounded-lg hover:bg-muted transition-colors font-medium" onClick={() => setIsMobileMenuOpen(false)}>Careers</Link>
+            
+            <div className="border-t mt-2 pt-2">
+              <div className="text-sm font-semibold text-muted-foreground px-4 mb-2">Quick Links</div>
+              <Link to="/services" className="px-4 py-2 rounded-md text-sm hover:bg-muted block" onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
+              <Link to="/nursing-hospital-management" className="px-4 py-2 rounded-md text-sm hover:bg-muted block" onClick={() => setIsMobileMenuOpen(false)}>Nursing Hospital Management</Link>
+              <Link to="/hr-internship" className="px-4 py-2 rounded-md text-sm hover:bg-muted block" onClick={() => setIsMobileMenuOpen(false)}>HR Internship</Link>
+              <Link to="/talent-connect" className="px-4 py-2 rounded-md text-sm hover:bg-muted block" onClick={() => setIsMobileMenuOpen(false)}>Talent Connect</Link>
+              <Link to="/tech-partner" className="px-4 py-2 rounded-md text-sm hover:bg-muted block" onClick={() => setIsMobileMenuOpen(false)}>Tech Partner</Link>
+              <Link to="/health-connect" className="px-4 py-2 rounded-md text-sm hover:bg-muted block" onClick={() => setIsMobileMenuOpen(false)}>Health Connect</Link>
+              <Link to="/ai-lab" className="px-4 py-2 rounded-md text-sm hover:bg-muted block" onClick={() => setIsMobileMenuOpen(false)}>AI Lab</Link>
+              <Link to="/projects" className="px-4 py-2 rounded-md text-sm hover:bg-muted block" onClick={() => setIsMobileMenuOpen(false)}>Projects</Link>
+              <Link to="/contact" className="px-4 py-2 rounded-md text-sm hover:bg-muted block" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</Link>
+            </div>
+
+            <div className="border-t pt-2 mt-2">
+              <div className="text-sm font-semibold text-muted-foreground px-4 mb-2">Login</div>
+              <Link to="/auth" className="px-4 py-3 rounded-lg hover:bg-muted font-medium block" onClick={() => setIsMobileMenuOpen(false)}>Student Login</Link>
+              <Link to="/employer/auth" className="px-4 py-3 rounded-lg hover:bg-muted font-medium block" onClick={() => setIsMobileMenuOpen(false)}>Employer Login</Link>
+              <Link to="/admin/auth" className="px-4 py-3 rounded-lg hover:bg-muted font-medium block text-amber-600" onClick={() => setIsMobileMenuOpen(false)}>Admin Login</Link>
+            </div>
+
+            <Link to="/apply" className="mt-4" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button variant="accent" className="w-full" size="lg">Apply Now</Button>
+            </Link>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Navbar;

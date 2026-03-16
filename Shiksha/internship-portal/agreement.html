@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agreement & Policy - Shiksha Nex Technologies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F9FAFB;
+            --primary: #2563EB;
+            --primary-hover: #1D4ED8;
+            --secondary: #64748B;
+            --card-bg: #FFFFFF;
+            --border: #E5E7EB;
+            --text-primary: #111827;
+            --text-secondary: #6B7280;
+            --success: #22C55E;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --shadow: 0px 10px 25px rgba(0,0,0,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            height: 70px;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 120px 0 60px;
+            min-height: 100vh;
+        }
+
+        .page-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        /* Steps Indicator */
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .step.active .step-circle {
+            background: var(--primary);
+            color: white;
+        }
+
+        .step.completed .step-circle {
+            background: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .step.active .step-label,
+        .step.completed .step-label {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .step-line {
+            width: 40px;
+            height: 2px;
+            background: var(--border);
+        }
+
+        .step.completed + .step-line,
+        .step.completed ~ .step-line {
+            background: var(--success);
+        }
+
+        /* Policy Card */
+        .policy-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 30px;
+        }
+
+        .policy-section {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .policy-section:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .policy-section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .policy-section p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .policy-section ul {
+            margin-top: 12px;
+            padding-left: 20px;
+        }
+
+        .policy-section li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        /* Checkbox */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 24px;
+            padding: 20px;
+            background: var(--bg-color);
+            border-radius: 8px;
+        }
+
+        .checkbox-container input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-container label {
+            font-size: 14px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            height: 48px;
+            padding: 0 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .steps {
+                flex-wrap: wrap;
+            }
+
+            .step-label {
+                display: none;
+            }
+
+            .step-line {
+                display: none;
+            }
+
+            .button-group {
+                flex-direction: column-reverse;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 100px 0 40px;
+            }
+
+            .policy-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">Shiksha Nex <span>Technologies</span></a>
+            <a href="registration.html" class="back-link">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-container">
+                <!-- Steps Indicator -->
+                <div class="steps">
+                    <div class="step completed">
+                        <div class="step-circle">1</div>
+                        <span class="step-label">Register</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step active">
+                        <div class="step-circle">2</div>
+                        <span class="step-label">Agreement</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step">
+                        <div class="step-circle">3</div>
+                        <span class="step-label">Review</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step">
+                        <div class="step-circle">4</div>
+                        <span class="step-label">Done</span>
+                    </div>
+                </div>
+
+                <h1 class="page-title">Agreement & Policy Confirmation</h1>
+
+                <!-- Policy Card -->
+                <div class="policy-card">
+                    <div class="policy-section">
+                        <h3>SECTION 1: FEES & REFUND POLICY</h3>
+                        <p><strong>Fees & Service Policy – Mandatory Agreement</strong></p>
+                        <p style="margin-top: 12px;">Shiksha Nex Technologies OPC Pvt Ltd does not sell jobs or guarantee employment. The fees charged are strictly for training, mentorship, project guidance and placement assistance services.</p>
+                        <p style="margin-top: 12px;">Once payment is made it confirms enrollment and is generally non-refundable unless the program is cancelled by the company.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h3>SECTION 2: TRAINING & SERVICE TERMS</h3>
+                        <p>The company provides:</p>
+                        <ul>
+                            <li>Internship training</li>
+                            <li>Industry projects</li>
+                            <li>Career mentorship</li>
+                            <li>Resume support</li>
+                            <li>Placement assistance</li>
+                        </ul>
+                        <p style="margin-top: 12px;">Completion depends on student performance and participation.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h3>SECTION 3: USER RESPONSIBILITY</h3>
+                        <p>Students must provide accurate details during registration.</p>
+                        <p style="margin-top: 12px;">Providing false information may result in cancellation.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h3>SECTION 4: ACCEPTANCE OF TERMS</h3>
+                        <p>By selecting the checkbox below the user confirms that they have read and agreed to all policies.</p>
+                    </div>
+                </div>
+
+                <!-- Checkbox -->
+                <div class="checkbox-container">
+                    <input type="checkbox" id="agreePolicy">
+                    <label for="agreePolicy">I have read and agree to the Agreement & Policy</label>
+                </div>
+
+                <!-- Buttons -->
+                <div class="button-group">
+                    <a href="registration.html" class="btn btn-secondary">Back</a>
+                    <button class="btn btn-primary" id="proceedBtn" disabled onclick="proceedToReview()">
+                        Proceed to Review
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const agreePolicy = document.getElementById('agreePolicy');
+        const proceedBtn = document.getElementById('proceedBtn');
+
+        agreePolicy.addEventListener('change', function() {
+            proceedBtn.disabled = !this.checked;
+        });
+
+        function proceedToReview() {
+            if (agreePolicy.checked) {
+                // Store agreement acceptance
+                localStorage.setItem('policyAccepted', 'true');
+                window.location.href = 'review.html';
+            }
+        }
+    </script>
+</body>
+</html>
+
